@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="meta desc" />
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <title>Quiz</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+
+</head> 
+    
+    <body>
+        <div class="container">
+            <script type="text/template" id="intro-template">
+                <h1>Bike Shop</h1>
+                <ul id="filters">
+                    <li>
+                        <a class="selected" href="#/">All</a>
+                    </li>
+                    <li>
+                        <a href="#/mountain">Mountain</a>
+                    </li>
+                    <li>
+                        <a href="#/road">Road</a>
+                    </li>
+                    <li>
+                        <a href="#/cross">Cyclocross</a>
+                    </li>
+                </ul>
+
+            </script>
+            
+            <section id="main">
+
+                <script id="bike-template" type="text/template">
+                    <div class="bike current">
+                    <div> <%= Bikes.type %> </div>
+                        <img src="<%= Bikes.imagePath %>" alt="<%= name %>"/> 
+                        <ul class="choices">
+                            <% for(var i = 0; i < questions[index].choices.length; i++) { %>
+                                <li>
+                                    <input type="radio" name="question" value="<%= [i] %>">
+                                    <%= questions[index].choices[i] %>
+                                    </input>
+                                </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                    </div>
+
+                    <div id="buttons">
+                        <label>View Mountain Bikes</label>
+                        <button type="button" id="mtb">Mountain Bikes</button>
+                        <button type="button" id="back">Back</button>
+                    </div>
+                </script>
+
+            </section>
+
+            <p id="end"></p>
+
+            <h4 id="answer"></h4>   
+
+        </div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="bower_components/underscore/underscore.js"></script>
+        <script src="bower_components/backbone/backbone.js"></script>
+        <script src="bower_components/handlebars/handlebars.js"></script>
+        <script src="js/data/data.json"></script>
+        <script src="js/app.js"></script>
+        <script src="js/AJAXPromiseManager.js"></script>
+
+
+    </body>
+
+</html>
