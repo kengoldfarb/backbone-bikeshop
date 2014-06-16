@@ -18,7 +18,7 @@
                     <li>
                         <a class="selected" href="#/">All</a>
                     </li>
-                    <li>
+                    <li id="mtb">
                         <a href="#/mountain">Mountain</a>
                     </li>
                     <li>
@@ -35,8 +35,8 @@
 
                 <script id="bike-template" type="text/template">
                     <div class="bike current">
-                    <div> <%= Bikes.type %> </div>
-                        <img src="<%= Bikes.imagePath %>" alt="<%= name %>"/> 
+                    <div> <%= bikes.type %> </div>
+                        <img src="<%= bikes.imagePath %>" alt="<%= name %>"/> 
                         <ul class="choices">
                             <% for(var i = 0; i < questions[index].choices.length; i++) { %>
                                 <li>

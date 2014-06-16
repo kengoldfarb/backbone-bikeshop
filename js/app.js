@@ -32,7 +32,6 @@ app.BikeCollection = Backbone.Collection.extend({
 
     initialize: function() {
         console.log('collection initialized');
-        console.log(this.model)
     },
 
     // filter out mountain bikes
@@ -41,100 +40,103 @@ app.BikeCollection = Backbone.Collection.extend({
     }
 });
 
-// create the global collection of bikes
-var Bikes = new app.BikeCollection();
-console.log(Bikes)
+// create the global collection of bikes, passing in the JSON data.
+//var Bikes = new app.BikeCollection(bikes);
 
 // //--------------
 // // Views
 // //--------------
 
 // single bike view, articles show view
-// app.BikeView = Backbone.View.extend({
-//     el: $('#main'),
-//     tagname: 'li',
+app.BikeView = Backbone.View.extend({
+    el: $('#main'),
+    tagname: 'li',
 
-//     template: _.template($('#bike-template').html()),
+    template: _.template($('#bike-template').html()),
 
-//     events: {
-//         'click #mtb' : 'showMountain'
-//     },
+    events: {
+        'click #mtb' : 'showMountain'
+    },
 
-//     initialize: function() {
-//         console.log('single bike view init');
-//         this.listenTo(this.model, 'change', this.render);
-//     },
+    initialize: function() {
+        this.bike = new app.BikeView({id: this.id});
+        this.bike.fetch();
+        this.bike.on('sync', this.render, this);
+        console.log('single bike view init');
+    },
 
-//     render: function() {
-//         this.$el.html(this.template({Bikes: this.model.toJSON()}));
-//         return this;
-//     },
+    render: function() {
+        this.$el.html(this.template({bike: this.bike}));
+        console.log(bike)
+        return this;
+    },
 
-//     showMountain: function() {
-//         console.log('view mountain bikes');
+    showMountain: function() {
+        console.log('view mountain bikes');
 
-//     }
+    }
 
-// });
+});
 
-// // all bikes view, articles index view
-// app.AppView = Backbone.View.extend({
+// all bikes view, articles index view
+app.AppView = Backbone.View.extend({
 
-//     template: _.template($('#intro').html()),
+    template: _.template($('#intro-template').html()),
 
-//     events: {
-//         'click a': 'showBike'
-//     },
+    events: {
+        'click a': 'showBike'
+    },
 
-//     initialize: function() {
-//         this.collection = new app.BikeCollection();
-//         this.collection.fetch();
-//         this.collection.on('all', this.render, this);
-//         //Bikes.fetch();
-//         console.log(this.collection)
-//     },
+    initialize: function() {
+        // passing bikes in calls the model
+        this.collection = new app.BikeCollection(bikes);
+        this.collection.fetch();
+        this.collection.on('sync', this.render, this);
+    },
 
-//     render: function() {
-//         this.$el.html(this.template({Bikes: this.collection}));
-//         console.log(Bikes);
-//         return this;
-//     },
+    render: function() {
+        this.$el.html(this.template({bikes: this.collection.toJSON()}));
+        console.log(bikes)
+        return this;
+    },
 
-//     showBike: function(e) {
-//         Backbone.history.navigate($(e.currentTarget).attr('href'), {trigger: true})
-//     }
+    showBike: function(e) {
+        Backbone.history.navigate($(e.currentTarget).attr('href'), {trigger: true});
+        console.log('showbike')
+    }
 
-// });
+});
 
-//var App = new app.AppView;
 
 //--------------
-// Routers
+//Routers
 //--------------
 
-// app.BikeAppRouter = Backbone.Router.extend({
+app.BikeAppRouter = Backbone.Router.extend({
 
-//     routes: {
-//         '' : 'index',
-//         'bike/:id': 'show'
-//     },
+    routes: {
+        '' : 'index',
+        'bikes/:id': 'show'
+    },
 
-//     index: function() {
-//       // on home route, render
-//       console.log('home');
-//     },
+    index: function() {
+      // on home route, render
+      var view = new app.AppView(bikes);
+      $('.container').html(view.render().el);
+      console.log(bikes);
+    },
 
-//     show: function(id) {
-//         console.log("with id" + id);
-//         this.appView = new app.AppView({collection: Bikes, id: id});
-//         $('#main').html(this.appView.render().el);
-//     }
+    show: function(id) {
+        console.log("with id " + id);
+        var bikeTypeView = new app.BikeView({id: id});
+        $('#main').html(bikeTypeView.render().el);
+    }
 
-// });
+});
 
-// var bikeAppRouter = new app.BikeAppRouter();
+var bikeAppRouter = new app.BikeAppRouter();
 
-// //Initialize the app.
-// (function(){
-//   Backbone.history.start();
-// })();
+//Initialize the app.
+(function(){
+  Backbone.history.start();
+})();
