@@ -34,7 +34,7 @@ app.BikeCollection = Backbone.Collection.extend({
         console.log('collection initialized');
     },
 
-    // filter out mountain bikes
+    //filter out mountain bikes
     mountain: function() {
         return this.where({model: mountain});
     }

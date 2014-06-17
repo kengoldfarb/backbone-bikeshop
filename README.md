@@ -1,4 +1,4 @@
-backbone-quiz
+backbone-bikeshop
 =============
 
-Re-factoring the quiz w/Backbone
+Making a new Backbone app
