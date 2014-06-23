@@ -79,6 +79,7 @@ app.HeaderView = Backbone.View.extend({
 
     navigate: function(e) {
         e.preventDefault();
+        console.log($(e.currentTarget).attr('href'))
         Backbone.history.navigate($(e.currentTarget).attr('href'), {trigger: true});
     }
 });
@@ -162,7 +163,7 @@ app.BikeAppRouter = Backbone.Router.extend({
 
     bikeIndex: function() {
         this.setup();
-        new app.BikeTypeIndexView({ el: '#main'});
+        new app.BikeTypeIndexView({ el: $('.main')});
     }
 
 });
