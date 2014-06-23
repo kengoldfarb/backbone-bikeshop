@@ -11,9 +11,10 @@
 </head> 
     
     <body>
-        <div class="container">
-            <script type="text/template" id="intro-template">
+        <header>
+            <script type="text/template" id="header-template">
                 <h1>Bike Shop</h1>
+                <p>THE HEADER OF THE APP, MAIN VIEW</p>
                 <ul id="filters">
                     <li>
                         <a class="selected" href="#/">All</a>
@@ -28,10 +29,38 @@
                         <a href="#/cross">Cyclocross</a>
                     </li>
                 </ul>
-
             </script>
+        </header>
+        <div class="main">
+            <script type="text/template" id="main-template">
+                <p>THE MAIN SECTION, CHILD VIEW</p>
+            </script>
+            <script type="text/template" id="single-bike-template">
+                <p>A BIKE</p>
+                <div><%= bikes.type %></div>
+            </script>
+        </div>
+
+<!--             // <script type="text/template" id="intro-template">
+            //     <h1>Bike Shop</h1>
+            //     <ul id="filters">
+            //         <li>
+            //             <a class="selected" href="#/">All</a>
+            //         </li>
+            //         <li id="mtb">
+            //             <a href="#/mountain">Mountain</a>
+            //         </li>
+            //         <li>
+            //             <a href="#/road">Road</a>
+            //         </li>
+            //         <li>
+            //             <a href="#/cross">Cyclocross</a>
+            //         </li>
+            //     </ul>
+
+            // </script> -->
             
-            <section id="main">
+            <!-- <section id="main">
 
                 <script id="bike-template" type="text/template">
                     <div class="bike current">
@@ -56,13 +85,13 @@
                     </div>
                 </script>
 
-            </section>
+            </section> -->
 
             <p id="end"></p>
 
             <h4 id="answer"></h4>   
 
-        </div>
+        
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="bower_components/underscore/underscore.js"></script>
