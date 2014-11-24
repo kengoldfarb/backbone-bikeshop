@@ -12,56 +12,27 @@
     
     <body>
         <div class="container">
-            <script type="text/template" id="intro-template">
-                <h1>Bike Shop</h1>
-                <ul id="filters">
-                    <li>
-                        <a class="selected" href="#/">All</a>
-                    </li>
-                    <li id="mtb">
-                        <a href="#/mountain">Mountain</a>
-                    </li>
-                    <li>
-                        <a href="#/road">Road</a>
-                    </li>
-                    <li>
-                        <a href="#/cross">Cyclocross</a>
-                    </li>
-                </ul>
+            <h1>Bike Shop</h1>
+            <p>Choose a bike from the list</p>
+
+            <script id="bike-template" type="text/template">
+                <div class="bike current">
+                    <img src="<%= coverImage %>"/>
+                    <ul>
+                        <li><%= type %></li>
+                        <li><%= brand %></li>
+                        <li><%= model %></li>
+                    </ul>
+                </div>
 
             </script>
-            
-            <section id="main">
 
-                <script id="bike-template" type="text/template">
-                    <div class="bike current">
-                    <div> <%= bikes.type %> </div>
-                        <img src="<%= bikes.imagePath %>" alt="<%= name %>"/> 
-                        <ul class="choices">
-                            <% for(var i = 0; i < questions[index].choices.length; i++) { %>
-                                <li>
-                                    <input type="radio" name="question" value="<%= [i] %>">
-                                    <%= questions[index].choices[i] %>
-                                    </input>
-                                </li>
-                            <% } %>
-                        </ul>
-                    </div>
-                    </div>
+        </div>
 
-                    <div id="buttons">
-                        <label>View Mountain Bikes</label>
-                        <button type="button" id="mtb">Mountain Bikes</button>
-                        <button type="button" id="back">Back</button>
-                    </div>
-                </script>
-
-            </section>
-
-            <p id="end"></p>
-
-            <h4 id="answer"></h4>   
-
+        <div id="sidebar">
+            <script id="bike-list" type="text/template">
+                <div><%= brand %> <%= model %></div>
+            </script>
         </div>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

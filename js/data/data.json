@@ -1,44 +1,44 @@
 var bikes = [
     {
-        "type": "mountain",
-        "brand": "Santa Cruz",
-        "model": "5010",
-        "imagePath": "../../images/1.jpg",
-        "id": 1
+        type: "mountain",
+        brand: "Santa Cruz",
+        model: "5010",
+        coverImage: "../../images/placeholder.gif",
+        id: 1
     },
     {
-        "type": "road",
-        "brand": "Trek",
-        "model": "Domane",
-        "imagePath": "../../images/1.jpg",
-        "id": 2
+        type: "road",
+        brand: "Trek",
+        model: "Domane",
+        coverImage: "../../images/placeholder.gif",
+        id: 2
     },
     {
-        "type": "cyclocross",
-        "brand": "Ridley",
-        "model": "X-Fire",
-        "imagePath": "../../images/1.jpg",
-        "id": 3
+        type: "cyclocross",
+        brand: "Ridley",
+        model: "X-Fire",
+        coverImage: "../../images/placeholder.gif",
+        id: 3
     },
     {
-        "type": "mountain",
-        "brand": "Yeti",
-        "model": "SB-66",
-        "imagePath": "../../images/1.jpg",
-        "id": 4
+        type: "mountain",
+        brand: "Yeti",
+        model: "SB-66",
+        coverImage: "../../images/placeholder.gif",
+        id: 4
     },
     {
-        "type": "road",
-        "brand": "Giant",
-        "model": "Defy",
-        "imagePath": "../../images/1.jpg",
-        "id": 5
+        type: "road",
+        brand: "Giant",
+        model: "Defy",
+        coverImage: "../../images/placeholder.gif",
+        id: 5
     },
     {
-        "type": "cyclocross",
-        "brand": "Focus",
-        "model": "Mares",
-        "imagePath": "../../images/1.jpg",
-        "id": 6
+        type: "cyclocross",
+        brand: "Focus",
+        model: "Mares",
+        coverImage: "../../images/placeholder.gif",
+        id: 6
     }
-]
+];

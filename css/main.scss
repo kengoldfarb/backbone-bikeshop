@@ -383,10 +383,15 @@ table {
     border-spacing: 0;
 }
 .container {
-	width: 550px;
-	margin: 0 auto;
+	margin: 50px;
   	background-color: #fff;
 }
+
+#sidebar {
+	width: 200px;
+	margin: 50px;
+}
+
 .end{
 	color: #37CFF5;
 	font-size: 2em;

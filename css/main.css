@@ -232,9 +232,12 @@ table {
   border-spacing: 0; }
 
 .container {
-  width: 550px;
-  margin: 0 auto;
+  margin: 50px;
   background-color: #fff; }
+
+#sidebar {
+  width: 200px;
+  margin: 50px; }
 
 .end {
   color: #37CFF5;
@@ -282,3 +285,5 @@ button {
   width: 200px;
   height: 200px;
   background-color: aliceblue; }
+
+/*# sourceMappingURL=main.css.map */

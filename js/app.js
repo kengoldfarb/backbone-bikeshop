@@ -1,23 +1,29 @@
 //https://github.com/stfnhrrs/capecodne.ws/tree/master/app/assets/javascripts
+
+
+// next step: click on list item, display bike.
+// http://coenraets.org/blog/2011/12/backbone-js-wine-cellar-tutorial-part-1-getting-started/
+
+
+
 'use strict';
 
 // namespace
-var app = {};
+var app = app || {};
 
 //--------------
 // Models
 //--------------
 
 app.SingleBike = Backbone.Model.extend({
-    initialize: function() {
-        console.log('The model has been initialized.');
-    },
-    defaults: function() {
-        return {
-            model: 'Sledgehammer',
-            photo: '/images/placeholder.gif'
-        }; 
+
+    defaults: {
+        coverImage: '/images/placeholder.gif',
+        type: 'type',
+        brand: 'brand',
+        model: 'model'
     }
+
 });
 
 //--------------
@@ -32,11 +38,6 @@ app.BikeCollection = Backbone.Collection.extend({
 
     initialize: function() {
         console.log('collection initialized');
-    },
-
-    // filter out mountain bikes
-    mountain: function() {
-        return this.where({model: mountain});
     }
 });
 
@@ -47,65 +48,47 @@ app.BikeCollection = Backbone.Collection.extend({
 // // Views
 // //--------------
 
-// single bike view, articles show view
+// show a list of bikes
+app.BikeListView = Backbone.View.extend({
+    //el: $('#main'),
+    tagname: 'ul',
+
+    initialize: function() {
+        this.model.bind('reset', this.render, this);
+    },
+
+    render: function() {
+        _.each(this.model.models, function (item) {
+            $(this.el).append(new app.BikeListItemView({model:item}).render().el);
+        }, this);
+        return this;
+    }
+
+});
+
+app.BikeListItemView = Backbone.View.extend({
+    tagName: 'ul',
+    className: 'bike',
+
+    template: _.template($('#bike-list').html()),
+
+    render: function() {
+        $(this.el).html(this.template(this.model.attributes));
+        return this;
+    }
+
+});
+
 app.BikeView = Backbone.View.extend({
-    el: $('#main'),
-    tagname: 'li',
 
     template: _.template($('#bike-template').html()),
 
-    events: {
-        'click #mtb' : 'showMountain'
-    },
-
-    initialize: function() {
-        this.bike = new app.BikeView({id: this.id});
-        this.bike.fetch();
-        this.bike.on('sync', this.render, this);
-        console.log('single bike view init');
-    },
-
     render: function() {
-        this.$el.html(this.template({bike: this.bike}));
-        console.log(bike)
+        $(this.el).html(this.template(this.model.attributes));
         return this;
-    },
-
-    showMountain: function() {
-        console.log('view mountain bikes');
-
     }
-
 });
 
-// all bikes view, articles index view
-app.AppView = Backbone.View.extend({
-
-    template: _.template($('#intro-template').html()),
-
-    events: {
-        'click a': 'showBike'
-    },
-
-    initialize: function() {
-        // passing bikes in calls the model
-        this.collection = new app.BikeCollection(bikes);
-        this.collection.fetch();
-        this.collection.on('sync', this.render, this);
-    },
-
-    render: function() {
-        this.$el.html(this.template({bikes: this.collection.toJSON()}));
-        console.log(bikes)
-        return this;
-    },
-
-    showBike: function(e) {
-        Backbone.history.navigate($(e.currentTarget).attr('href'), {trigger: true});
-        console.log('showbike')
-    }
-
-});
 
 
 //--------------
@@ -121,9 +104,11 @@ app.BikeAppRouter = Backbone.Router.extend({
 
     index: function() {
       // on home route, render
-      var view = new app.AppView(bikes);
-      $('.container').html(view.render().el);
-      console.log(bikes);
+      this.bikeList = new app.BikeCollection(bikes);
+      this.bikeListView = new app.BikeListView({model: this.bikeList});
+      //this.bikeList.fetch();
+      $('#sidebar').html(this.bikeListView.render().el);
+      console.log(bikes + 'home route');
     },
 
     show: function(id) {
