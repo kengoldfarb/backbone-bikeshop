@@ -1,4 +1,4 @@
-var bikes = [
+{ "bikes": [
     {
         "type": "mountain",
         "brand": "Santa Cruz",
@@ -40,5 +40,5 @@ var bikes = [
         "model": "Mares",
         "imagePath": "../../images/1.jpg",
         "id": 6
-    }
-]
+    }]
+}

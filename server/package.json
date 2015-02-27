@@ -1,0 +1,11 @@
+{
+  "name": "backbone-bikeshop-api",
+  "description": "",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "^4.8.0"
+  },
+  "devDependencies": {
+
+  }
+}
